@@ -11,7 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: PHPUnit tests
-          uses: php-actions/phpunit@v9
+          uses: MilesChou/php-tools-action/phpunit@master
           with:
-              configuration: phpunit.xml.dist
-              memory_limit: 256M
+              args: --configuration phpunit.xml.dist
+        - name: PHPStan tests
+          uses: MilesChou/php-tools-action/phpstan@master
+          with:
+              args: phpstan.neon.dist
+        - name: psalm
+          uses: psalm/psalm-github-actions@1.0.0
+          with:
+              configuration: psalm.xml
