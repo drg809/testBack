@@ -10,7 +10,7 @@ class GildedRose {
         $this->items = $items;
     }
 
-    function update_quality() {
+    function update_quality() : void {
         foreach ($this->items as $item) {
             if ($item->name != 'Aged Brie' and $item->name != 'Backstage passes to a TAFKAL80ETC concert') {
                 if ($item->quality > 0) {
