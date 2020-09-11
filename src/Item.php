@@ -4,9 +4,9 @@ namespace Runroom\GildedRose;
 
 class Item {
 
-    public $name;
-    public $sell_in;
-    public $quality;
+    public string $name;
+    public int $sell_in;
+    public int $quality;
 
     function __construct($name, $sell_in, $quality) {
         $this->name = $name;
