@@ -15,7 +15,7 @@ class GildedRose {
             if ($item->name != 'Aged Brie' and $item->name != 'Backstage passes to a TAFKAL80ETC concert') {
                 if ($item->quality > 0) {
                     if ($item->name != 'Sulfuras, Hand of Ragnaros') {
-                        $item->quality = $this->setQuality(false,$item->quality,1);
+                        $item->quality = $this->setOperation(false,$item->quality,1);
 
                     }
                 }
@@ -25,12 +25,12 @@ class GildedRose {
                     if ($item->name == 'Backstage passes to a TAFKAL80ETC concert') {
                         if ($item->sell_in < 11) {
                             if ($item->quality < 50) {
-                                $item->quality = $this->setQuality(true,$item->quality,1);
+                                $item->quality = $this->setOperation(true,$item->quality,1);
                             }
                         }
                         if ($item->sell_in < 6) {
                             if ($item->quality < 50) {
-                                $item->quality = $this->setQuality(true,$item->quality,1);
+                                $item->quality = $this->setOperation(true,$item->quality,1);
                             }
                         }
                     }
@@ -38,7 +38,7 @@ class GildedRose {
             }
 
             if ($item->name != 'Sulfuras, Hand of Ragnaros') {
-                $item->sell_in = $item->sell_in - 1;
+                $item->sell_in = $this->setOperation(false,$item->sell_in,1);
             }
 
             if ($item->sell_in < 0) {
@@ -46,22 +46,22 @@ class GildedRose {
                     if ($item->name != 'Backstage passes to a TAFKAL80ETC concert') {
                         if ($item->quality > 0) {
                             if ($item->name != 'Sulfuras, Hand of Ragnaros') {
-                                $item->quality = $this->setQuality(false,$item->quality,1);
+                                $item->quality = $this->setOperation(false,$item->quality,1);
                             }
                         }
                     } else {
-                        $item->quality = $this->setQuality(false,$item->quality,$item->quality);
+                        $item->quality = $this->setOperation(false,$item->quality,$item->quality);
                     }
                 } else {
                     if ($item->quality < 50) {
-                        $item->quality = $this->setQuality(true,$item->quality,1);
+                        $item->quality = $this->setOperation(true,$item->quality,1);
                     }
                 }
             }
         }
     }
 
-    private function setQuality(bool $operation,int $op1,int $op2) : int {
+    private function setOperation(bool $operation,int $op1,int $op2) : int {
         return $operation ? $op1 + $op2 : $op1 - $op2;
     }
 }
