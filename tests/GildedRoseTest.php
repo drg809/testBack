@@ -14,9 +14,10 @@ class GildedRoseTest extends TestCase
     public function itemsDegradeQuality() : void
     {
         $items = [new Item('', 1, 5)];
+        $index = intval(array_search(new Item('', 1, 5),$items));
 
   		$gilded_rose = new GildedRose($items);
-        $gilded_rose->updateQuality();
+        $gilded_rose->updateQuality($index);
 
         $this->assertEquals(4, $items[0]->quality);
   	}
@@ -26,10 +27,11 @@ class GildedRoseTest extends TestCase
      */
     public function itemsDegradeDoubleQualityOnceTheSellInDateHasPass() : void
     {
-  		$items = [new Item('', -1, 5)];
+        $items = [new Item('', -1, 5)];
+        $index = intval(array_search(new Item('', -1, 5),$items));
 
   		$gilded_rose = new GildedRose($items);
-        $gilded_rose->updateQuality();
+        $gilded_rose->updateQuality($index);
 
   		$this->assertEquals(3, $items[0]->quality);
   	}
@@ -40,9 +42,10 @@ class GildedRoseTest extends TestCase
     public function itemsCannotHaveNegativeQuality() : void
     {
   		$items = [new Item('', 0, 0)];
+        $index = intval(array_search(new Item('', 0, 0),$items));
 
   		$gilded_rose = new GildedRose($items);
-        $gilded_rose->updateQuality();
+        $gilded_rose->updateQuality($index);
 
   		$this->assertEquals(0, $items[0]->quality);
   	}
@@ -52,10 +55,11 @@ class GildedRoseTest extends TestCase
      */
     public function agedBrieIncreasesQualityOverTime() : void
     {
-  		$items = [new Item('Aged Brie', 0, 5)];
+        $items = [new Item('Aged Brie', 0, 5)];
+        $index = intval(array_search(new Item('Aged Brie', 0, 50),$items));
 
         $gilded_rose = new GildedRose($items);
-        $gilded_rose->updateQuality();
+        $gilded_rose->updateQuality($index);
 
   		$this->assertEquals(7, $items[0]->quality);
   	}
@@ -63,12 +67,13 @@ class GildedRoseTest extends TestCase
     /**
      * @test
      */
-    public function qualityCannotBeGreaterThan50() : void
+    public function qualityCannotBeGreater5Than0() : void
     {
-  		$items = [new Item('Aged Brie', 0, 50)];
+        $items = [new Item('Aged Brie', 0, 50)];
+        $index = intval(array_search(new Item('Aged Brie', 0, 50),$items));
 
         $gilded_rose = new GildedRose($items);
-        $gilded_rose->updateQuality();
+        $gilded_rose->updateQuality($index);
 
   		$this->assertEquals(50, $items[0]->quality);
   	}
@@ -78,10 +83,11 @@ class GildedRoseTest extends TestCase
      */
     public function sulfurasDoesNotChange() : void
     {
-  		$items = [new Item('Sulfuras, Hand of Ragnaros', 10, 10)];
+        $items = [new Item('Sulfuras, Hand of Ragnaros', 10, 10)];
+        $index = intval(array_search(new Item('Aged Brie', 0, 50),$items));
 
         $gilded_rose = new GildedRose($items);
-        $gilded_rose->updateQuality();
+        $gilded_rose->updateQuality($index);
 
   		$this->assertEquals(10, $items[0]->sell_in);
   		$this->assertEquals(10, $items[0]->quality);
@@ -106,10 +112,11 @@ class GildedRoseTest extends TestCase
      */
     public function backstageQualityIncreaseOverTimeWithCertainRules(int $sellIn,int $quality,int $expected) : void
     {
-  		$items = [new Item('Backstage passes to a TAFKAL80ETC concert', $sellIn, $quality)];
+        $items = [new Item('Backstage passes to a TAFKAL80ETC concert', $sellIn, $quality)];
+        $index = intval(array_search(new Item('Backstage passes to a TAFKAL80ETC concert', $sellIn, $quality),$items));
 
         $gilded_rose = new GildedRose($items);
-        $gilded_rose->updateQuality();
+        $gilded_rose->updateQuality($index);
 
   		$this->assertEquals($expected, $items[0]->quality);
   	}
