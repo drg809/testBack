@@ -1,0 +1,17 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+        - name: PHPUnit tests
+          uses: php-actions/phpunit@v9
+          with:
+              configuration: phpunit.xml.dist
+              memory_limit: 256M
