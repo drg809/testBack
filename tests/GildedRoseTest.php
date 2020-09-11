@@ -104,7 +104,7 @@ class GildedRoseTest extends TestCase
      * @dataProvider backstageRules
      * @test
      */
-    public function backstageQualityIncreaseOverTimeWithCertainRules($sellIn, $quality, $expected) : void
+    public function backstageQualityIncreaseOverTimeWithCertainRules(int $sellIn,int $quality,array $expected) : void
     {
   		$items = [new Item('Backstage passes to a TAFKAL80ETC concert', $sellIn, $quality)];
 
